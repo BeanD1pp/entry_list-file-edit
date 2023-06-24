@@ -5,23 +5,23 @@ for i, line in enumerate(lines):
     model = line.startswith('MODEL=')
     line = line.replace('MODEL=', '')
     line = line.split('_')
-    position = i + 8
+    distance = i + 8
 
     if not model:
         continue
 
-    if position >= len(lines):
-        lines.append("\n" * 8)
+    if distance >= len(lines):
+        lines.append("\n" * distance - len(lines))
         print("added")
 
     if "traffic" in line:
-        if not lines[position].startswith("AI=fixed"):
+        if not lines[distance].startswith("AI=fixed"):
             lines.insert(i + 8, "AI=fixed\n")
             print(lines[i] + "Added: AI=fixed")
         else:
             print(lines[i] + "No Change: AI=fixed")
     else:
-        if not lines[position].startswith("AI=none"):
+        if not lines[distance].startswith("AI=none"):
             lines.insert(i + 8, "AI=none\n")
             print(lines[i] + "Added: AI=none")
         else:
